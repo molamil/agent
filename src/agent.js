@@ -39,7 +39,7 @@
 			// Check that the original function is either null or of type function
 			var oF = o[fName];
 			if (oF != undefined && (typeof oF != "function")) {
-				Zumo.log.warn("The provided function name \"" + fName + "\" does not reference a function but a " +
+				this._warn("The provided function name \"" + fName + "\" does not reference a function but a " +
 						(typeof o[fName]) + " - this member should be changed at runtime to a function in order " +
 						"to avoid unexpected results");
 			}
@@ -92,7 +92,7 @@
 			if (proxyPos > -1) {
 				this._registry.splice(proxyPos, 1);
 			} else {
-				Zumo.log.info("There is no matching function to remove on " + fName);
+				this._warn("There is no matching function to remove on " + fName);
 			}
 
 		},
@@ -101,7 +101,7 @@
 
 			// Check that the first parameter is either an object or a string.
 			if (typeof arguments[0] != "object" && typeof arguments[0] != "string") {
-				Zumo.log.warn("The first parameter to observe/ignore should be either an object (that holds the function " +
+				this._warn("The first parameter to observe/ignore should be either an object (that holds the function " +
 						"to be observed/ignored) or a string (the function name to be obeserved/ignored, taking window as the " +
 						"default object), no hook will be processed");
 				return;
@@ -134,17 +134,17 @@
 
 			// Check that we have an object.
 			if (typeof request.o != "object") {
-				Zumo.log.warn("No object to observe, no hook will be processed");
+				this._warn("No object to observe, no hook will be processed");
 				request.success = false;
 
 			// Check that we have a function name.
 			} else if (typeof request.fName != "string") {
-				Zumo.log.warn("There was no function name string provided to observe, no hook will be processed");
+				this._warn("There was no function name string provided to observe, no hook will be processed");
 				request.success = false;
 
 			// Check that we have a function name.
 			} else if (typeof request.hook != "function") {
-				Zumo.log.warn("There was no hook function provided to observe, no hook will be processed");
+				this._warn("There was no hook function provided to observe, no hook will be processed");
 				request.success = false;
 			}
 
@@ -183,7 +183,7 @@
 				return;
 
 			if (proxy.original === f) {
-				Zumo.log.warn("You cannot observe a function to itself: " + f);
+				this._warn("You cannot observe a function to itself: " + f);
 				return;
 			}
 
@@ -199,7 +199,7 @@
 					n = i + 1;
 			}
 			if (hookExists) {
-				Zumo.log.info("Hook already exists, will not be added: " + f);
+				this._warn("Hook already exists, will not be added: " + f);
 			} else {
 				var hook = {
 					f: f,
@@ -210,6 +210,11 @@
 			}
 			this._buildProxy(proxy);
 
+		},
+
+		_warn: function(message) {
+			if (window.console && typeof window.console.warn == "function")
+				window.console.warn(message);
 		}
 
 
