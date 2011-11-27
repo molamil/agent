@@ -21,13 +21,13 @@
 		/*
 		 * Usage:
 		 * - observe(fName, hook)
-		 * - observe(fName, hook, thisArg)
+		 * - observe(fName, hook, thisContext)
 		 * - observe(fName, hook, priority)
-		 * - observe(fName, hook, thisArg, priority)
-		 * - observe(o, fName, hook);
-		 * - observe(o, fName, hook, thisArg);
-		 * - observe(o, fName, hook, priority);
-		 * - observe(o, fName, hook, thisArg, priority);
+		 * - observe(fName, hook, thisContext, priority)
+		 * - observe(o, fName, hook)
+		 * - observe(o, fName, hook, thisContext)
+		 * - observe(o, fName, hook, priority)
+		 * - observe(o, fName, hook, thisContext, priority)
 		 */
 		observe: function() {
 
@@ -40,7 +40,7 @@
 			var o =  request.o;
 			var fName = request.fName;
 			var hook = request.hook;
-			var thisArg = request.thisArg;
+			var thisContext = request.thisContext;
 			var priority = request.priority;
 
 			// Check that the original function is either null or of type function
@@ -63,16 +63,16 @@
 			}
 			if (!proxyExists)
 				proxy = this._createProxy(o, fName);
-			this._addHook(proxy, hook, thisArg, priority)
+			this._addHook(proxy, hook, thisContext, priority)
 
 		},
 
 		/*
 		 * Usage:
 		 * - ignore(fName, hook)
-		 * - ignore(fName, hook, thisArg)
-		 * - ignore(o, fName, hook);
-		 * - ignore(o, fName, hook, thisArg);
+		 * - ignore(fName, hook, thisContext)
+		 * - ignore(o, fName, hook)
+		 * - ignore(o, fName, hook, thisContext)
 		 */
 		ignore: function() {
 
@@ -120,7 +120,7 @@
 				o: defaultsO ? window : arguments[0],
 				fName: defaultsO ? arguments[0] : arguments[1],
 				hook: defaultsO ? arguments[1] : arguments[2],
-				thisArg: null,
+				thisContext: null,
 				priority: 0,
 				success: true
 			};
@@ -129,7 +129,7 @@
 				var arg1 = defaultsO ? (arguments[2]) : (arguments[3]);
 				var arg2 = defaultsO ? (arguments[3]) : (arguments[4]);
 				if (arg1 && typeof arg1 == "object") {
-					request.thisArg = arg1;
+					request.thisContext = arg1;
 					if (arg2 && typeof arg2 == "number")
 						request.priority = arg2;
 				} else if (typeof arg1 == "number") {
@@ -149,7 +149,7 @@
 				this._warn("There was no function name string provided to observe, no hook will be processed");
 				request.success = false;
 
-			// Check that we have a function name.
+			// Check that we have a function.
 			} else if (typeof request.hook != "function") {
 				this._warn("There was no hook function provided to observe, no hook will be processed");
 				request.success = false;
@@ -178,12 +178,12 @@
 				//TODO: Review the this context of the called function.
 				for (var i = proxy.hooks.length - 1; i >= 0; i--) {
 					var hook = proxy.hooks[i];
-					hook.f.apply(hook.thisArg || this, arguments);
+					hook.f.apply(hook.thisContext || this, arguments);
 				}
 			}
 		},
 
-		_addHook: function(proxy, f, thisArg, priority) {
+		_addHook: function(proxy, f, thisContext, priority) {
 
 			// Check whether there is a function member defined for the object.
 			if (!f)
@@ -210,7 +210,7 @@
 			} else {
 				var hook = {
 					f: f,
-					thisArg: thisArg,
+					thisContext: thisContext,
 					priority: priority
 				};
 				proxy.hooks.splice(n, 0, hook);
