@@ -14,13 +14,14 @@
 			font-family: Georgia, serif;
 		}
 
-		h1 {
+		#title {
+			cursor: pointer;
 			margin: 0;
 			color: #666;
 			font-size: 28px;
 		}
 
-		h2 {
+		#caption {
 			margin: 5px 0 0 0;
 			color: #AAA;
 			font-size: 16px;
@@ -46,6 +47,9 @@
 	<script type="text/javascript" src="../src/agent.js"></script>
 	<script type="text/javascript">
 
+
+		// Helper functions
+
 		function pad(s, n) {
 			n = n || 2;
 			var m = "" + s;
@@ -62,21 +66,59 @@
 			document.getElementById("log").innerHTML += s;
 		}
 
+
+		// Initial onload tests
+
 		Agent.observe("onload", function() {
-			log("onload without object reference");
+			log("onload - without object reference");
 		});
 
 		Agent.observe(window, "onload", function() {
-			log("onload with window reference");
+			log("onload - with window reference");
 		});
+
+
+		// On event tests
+
+		Agent.observe(window, "onload", function() {
+
+			Agent.observe(document.getElementById("title"), "onclick", function() {
+				log("title clicked");
+			});
+
+			Agent.observe(document.getElementById("caption"), "onmouseover", function() {
+				log("caption rolled over");
+			});
+
+			Agent.observe(document.getElementById("caption"), "onmouseout", function() {
+				log("caption rolled out");
+			});
+
+		});
+
+		// Set timeout tests
+
+		var ft = function() {
+			log("timeout 10 secs elapsed - default function");
+		};
+
+		Agent.observe("ft", function() {
+			log("timeout 10 secs elapsed - no argument, priority 10");
+		}, 10);
+
+		var tid = setInterval(ft, 10 * 1000, "Jorge");
+
+		Agent.observe("ft", function(name) {
+			log("timeout 10 secs elapsed - argument('" + name + "'), priority 20");
+		}, 20);
 
 	</script>
 	
 </head>
 <body>
 
-<h1>Agent</h1>
-<h2>Functional testing <cite>(tester playground)</cite></h2>
+<h1 id="title">Agent</h1>
+<h2 id="caption">Functional testing <cite>(tester playground)</cite></h2>
 <p id="log"></p>
 
 </body>

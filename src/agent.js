@@ -1,3 +1,10 @@
+/*
+ * AGENT - JavaScript function proxy
+ *
+ * Author: Jorge Hernandez
+ * http://github.com/molamil/agent
+ *
+ */
 (function(window) {
 
 
