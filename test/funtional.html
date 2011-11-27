@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>Agent - Functional testing (tester playground)</title>
+
+	<style type="text/css">
+
+		body {
+			padding: 20px 50px;
+			font-family: Georgia, serif;
+		}
+
+		h1 {
+			margin: 0;
+			color: #666;
+			font-size: 28px;
+		}
+
+		h2 {
+			margin: 5px 0 0 0;
+			color: #AAA;
+			font-size: 16px;
+			font-weight: normal;
+		}
+
+		#log {
+			border-top: 2px solid #999;
+			padding-top: 12px;
+			color: #AAA;
+			line-height: 16px;
+			font-family: Courier, sans-serif;
+			font-size: 13px;
+		}
+
+		#log strong {
+			color: #666;
+			font-weight: normal;
+		}
+
+	</style>
+
+	<script type="text/javascript" src="../src/agent.js"></script>
+	<script type="text/javascript">
+
+		function pad(s, n) {
+			n = n || 2;
+			var m = "" + s;
+			while (m.length < n)
+				m = "0" + m;
+			return m;
+		}
+
+		function log(message) {
+			var d = new Date();
+			var t = pad(d.getHours()) + ":" + pad(d.getMinutes()) + ":" + pad(d.getSeconds()) + ":" +
+					pad(d.getMilliseconds(), 3);
+			var s = t + " - <strong>" + message + "</strong><br />";
+			document.getElementById("log").innerHTML += s;
+		}
+
+		Agent.observe("onload", function() {
+			log("onload without object reference");
+		});
+
+		Agent.observe(window, "onload", function() {
+			log("onload with window reference");
+		});
+
+	</script>
+	
+</head>
+<body>
+
+<h1>Agent</h1>
+<h2>Functional testing <cite>(tester playground)</cite></h2>
+<p id="log"></p>
+
+</body>
+</html>
