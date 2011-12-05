@@ -1,7 +1,6 @@
 Agent - JavaScript function interceptor
 =======================================
 
-TODO
 
 Usage
 -----
