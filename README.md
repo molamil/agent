@@ -21,7 +21,7 @@ Observes every time a given function or method is called, and attaches another f
 * `observe(o, fName, hook, priority)`
 * `observe(o, fName, hook, thisContext, priority)`
 
-Arguments:
+*Arguments:*
 
 * **fName** _(string)_ Name of the function to observe. Example: `"onload"`.
 * **hook** _(function)_ Function to be executed every time the observed function is called. Example: `function() { alert("Hi there"); }`.
@@ -35,13 +35,10 @@ Arguments:
 Stops observing a previously hooked function:
 
 * `ignore(fName, hook)`
-* `ignore(fName, hook, thisContext)`
 * `ignore(o, fName, hook)`
-* `ignore(o, fName, hook, thisContext)`
 
-Arguments:
+*Arguments:*
 
-* **fName** _(string)_ Name of the function to observe. Example: `"onload"`.
-* **hook** _(function)_ Function to be executed every time the observed function is called. Example: `function() { alert("Hi there"); }`.
+* **fName** _(string)_ Name of the function to ignore. Example: `"onload"`.
+* **hook** _(function)_ Function previously hooked via the `observe()` method. Example: `myFunction`.
 * **o** _(object)_ Object that contains the function to observe. Example: `window`.
-* **thisContext** _(object)_ The value of `this` to be applied to the hook function. Example: `MyObject`.
