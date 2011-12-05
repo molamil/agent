@@ -39,6 +39,6 @@ Stops observing a previously hooked function:
 
 **Arguments:**
 
-* **fName** _(string)_ Name of the function to ignore. Example: `"onload"`.
+* **fName** _(string)_ Name of the function containing the hook to ignore. Example: `"onload"`.
 * **hook** _(function)_ Function previously hooked via the `observe()` method. Example: `myFunction`.
 * **o** _(object)_ Object that contains the function to observe. Example: `window`.
