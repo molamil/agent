@@ -3,7 +3,7 @@ Agent - JavaScript function interceptor
 
 Agent is a slim JavaScript library that allows observing function calls by hooking further code to be executed when an observed function is invoked.
 
-Agent can be used as an [aspect-oriented programming](http://en.wikipedia.org/wiki/Aspect-oriented_programming) tool, as it enables the definition of advices (hook functions) that can be linked to join points (observed functions). Practical AOP applications can include logging, persistance or authentication.
+Agent can be used as an [aspect-oriented programming](http://en.wikipedia.org/wiki/Aspect-oriented_programming) tool, as it enables the definition of advices (hook functions) that can be linked to join points (observed functions). Practical AOP applications include logging, persistance and authentication.
 
 
 Usage
