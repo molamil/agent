@@ -3,11 +3,16 @@ Agent - JavaScript function interceptor
 
 Agent is a slim JavaScript library that allows observing function calls by hooking further code to be executed when an observed function is invoked.
 
+Agent can be used as an [aspect-oriented programming](http://en.wikipedia.org/wiki/Aspect-oriented_programming) tool, as it enables the definition of advices (hook functions) that can be linked to join points (observed functions). Practical AOP applications can include logging, persistance or authentication.
+
 
 Usage
 -----
 
-### observe()
+`Agent` is provided as a simple JavaScript object containing 2 public methods:  
+
+
+### Agent.observe()
 
 Observes every time a given function or method is called, and attaches another function to be executed every time that happens. There are a number of arguments that can be passed to the observe function - the function signatures are as follows:
 
@@ -29,7 +34,7 @@ Observes every time a given function or method is called, and attaches another f
 * **priority** _(number)_ Priority level of the hook, higher priorities will be executed before lower priorities. If two or more hooks have the same priority, they are executed on the order they were registered. Example: `10`.
 
 
-### ignore()
+### Agent.ignore()
 
 Stops observing a previously hooked function:
 
