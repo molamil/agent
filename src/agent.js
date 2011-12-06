@@ -37,22 +37,24 @@
 				return;
 
 			// Map arguments.
-			var o =  request.o;
-			var fName = request.fName;
-			var hook = request.hook;
-			var thisContext = request.thisContext;
-			var priority = request.priority;
+			var o =  request.o,
+				fName = request.fName,
+				hook = request.hook,
+				thisContext = request.thisContext,
+				priority = request.priority,
+				oF,
+				proxyExists,
+				proxy;
 
 			// Check that the original function is either null or of type function
-			var oF = o[fName];
+			oF = o[fName];
 			if (oF != undefined && (typeof oF != "function")) {
 				this._warn("The provided function name \"" + fName + "\" does not reference a function but a " +
 						(typeof o[fName]) + " - this member should be changed at runtime to a function in order " +
 						"to avoid unexpected results");
 			}
 
-			var proxyExists = false;
-			var proxy;
+			proxyExists = false;
 			for (var i = 0; i < this._registry.length; i++) {
 				var p = this._registry[i];
 				if (p.o === o && p.fName == fName) {
@@ -80,12 +82,12 @@
 				return;
 
 			// Map arguments.
-			var o =  request.o;
-			var fName = request.fName;
-			var hook = request.hook;
+			var o =  request.o,
+				fName = request.fName,
+				hook = request.hook,
+				exists;
 
 			// Get the position of the proxy to remove.
-			var exists = false;
 			for (var i = 0; i < this._registry.length; i++) {
 				var p = this._registry[i];
 				if (p.o === o && p.fName == fName) {
@@ -115,8 +117,8 @@
 			}
 
 			// Map arguments.
-			var defaultsO = (typeof arguments[0] == "string");
-			var request = {
+			var defaultsO = (typeof arguments[0] == "string"),
+				request = {
 				o: defaultsO ? window : arguments[0],
 				fName: defaultsO ? arguments[0] : arguments[1],
 				hook: defaultsO ? arguments[1] : arguments[2],
@@ -126,8 +128,8 @@
 			};
 
 			if (arguments.length > (defaultsO ? 2 : 3)) {
-				var arg1 = defaultsO ? (arguments[2]) : (arguments[3]);
-				var arg2 = defaultsO ? (arguments[3]) : (arguments[4]);
+				var arg1 = defaultsO ? (arguments[2]) : (arguments[3]),
+					arg2 = defaultsO ? (arguments[3]) : (arguments[4]);
 				if (arg1 && typeof arg1 == "object") {
 					request.thisContext = arg1;
 					if (arg2 && typeof arg2 == "number")
@@ -160,13 +162,13 @@
 		},
 
 		_createProxy: function(o, fName) {
-			var proxy = {
-				o: o,
-				fName: fName,
-				hooks: [] // of {f, priority}
-				// Adding original after adding the hook.
-			};
-			var original = o[fName];
+			var original = o[fName],
+				proxy = {
+					o: o,
+					fName: fName,
+					hooks: [] // of {f, priority}
+					// Adding original after adding the hook.
+				};
 			this._addHook(proxy, original, 0);
 			proxy.original = original;
 			this._registry.push(proxy);
@@ -175,7 +177,6 @@
 
 		_buildProxy: function(proxy) {
 			proxy.o[proxy.fName] = function() {
-				//TODO: Review the this context of the called function.
 				for (var i = proxy.hooks.length - 1; i >= 0; i--) {
 					var hook = proxy.hooks[i];
 					hook.f.apply(hook.thisContext || this, arguments);
@@ -194,8 +195,8 @@
 				return;
 			}
 
-			var n = 0;
-			var hookExists = false;
+			var n = 0,
+				hookExists = false;
 			for (var i = 0; i < proxy.hooks.length; i++) {
 				var h = proxy.hooks[i];
 				if (h.f === f) {
