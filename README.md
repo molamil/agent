@@ -1,6 +1,8 @@
 Agent - JavaScript function interceptor
 =======================================
 
+Agent is a slim JavaScript library that allows observing function calls by hooking further code to be executed when an observed function is invoked.
+
 
 Usage
 -----
