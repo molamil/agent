@@ -51,7 +51,7 @@ Stops observing a previously hooked function:
 Examples
 --------
 
-### Wraping window.onload:
+### Wrapping window.onload:
 
     window.onload = function() {
       alert("Default body.onload");
