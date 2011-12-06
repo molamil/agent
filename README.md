@@ -5,8 +5,6 @@ Agent - JavaScript function interceptor
 Usage
 -----
 
-Agent has a method for observing a function, an a method for ingnoring it.
-
 ### observe()
 
 Observes every time a given function or method is called, and attaches another function to be executed every time that happens. There are a number of arguments that can be passed to the observe function - the function signatures are as follows:
