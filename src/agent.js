@@ -70,9 +70,7 @@
 		/*
 		 * Usage:
 		 * - ignore(fName, hook)
-		 * - ignore(fName, hook, thisContext)
 		 * - ignore(o, fName, hook)
-		 * - ignore(o, fName, hook, thisContext)
 		 */
 		ignore: function() {
 
@@ -87,20 +85,22 @@
 			var hook = request.hook;
 
 			// Get the position of the proxy to remove.
-			var proxyPos = -1;
+			var exists = false;
 			for (var i = 0; i < this._registry.length; i++) {
 				var p = this._registry[i];
-				if (p.o === o && p.fName == fName && p.hook === hook) {
-					proxyPos = i;
-					break;
+				if (p.o === o && p.fName == fName) {
+					for (var j = 0; j < p.hooks.length; j++) {
+						if (p.hooks[j].f === hook) {
+							exists = true;
+							p.hooks.splice(j, 1);
+							break;
+						}
+					}
 				}
 			}
 
-			if (proxyPos > -1) {
-				this._registry.splice(proxyPos, 1);
-			} else {
+			if (!exists)
 				this._warn("There is no matching function to remove on " + fName);
-			}
 
 		},
 
