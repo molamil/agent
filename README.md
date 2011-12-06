@@ -54,7 +54,7 @@ Examples
 ### Wrapping window.onload:
 
     window.onload = function() {
-      alert("Default body.onload");
+      alert("Default window.onload");
     };
 
     Agent.observe("onload", function() {
