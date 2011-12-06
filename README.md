@@ -46,3 +46,17 @@ Stops observing a previously hooked function:
 * **fName** _(string)_ Name of the function containing the hook to ignore. Example: `"onload"`.
 * **hook** _(function)_ Function previously hooked via the `observe()` method. Example: `myFunction`.
 * **o** _(object)_ Object that contains the function to observe. Example: `window`.
+
+
+Examples
+--------
+
+**Wraping window.onload:***
+
+    window.onload = function() {
+      alert("Default body.onload");
+    };
+
+    Agent.observe("onload", function() {
+      alert("Hooked function");
+    });
