@@ -55,6 +55,8 @@ Examples
 
 The following examples show some practical usages of Agent. All the examples are available in the test directory.
 
+---
+
 ### Wrapping window.onload:
 
     window.onload = function() {
@@ -65,6 +67,7 @@ The following examples show some practical usages of Agent. All the examples are
       alert("Hooked function");
     });
 
+---
 
 ### Logging every time jQuery.append is called:
 
