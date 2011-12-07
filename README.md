@@ -62,3 +62,18 @@ Examples
     Agent.observe("onload", function() {
       alert("Hooked function");
     });
+
+
+### Logging every time jQuery.append is called:
+
+    $(function() {
+        
+        // Observing the append method on jQuery's prototype.
+        Agent.observe($.prototype, "append", function(content) {
+            if (window.console && (typeof window.console.log == "function"))
+                window.console.log("jquery.append called with parameter: " + content);
+        });
+        
+        $("body").append("<h1>Hello World!</h1>");
+        
+    });
