@@ -116,3 +116,84 @@ The following examples show some practical usages of Agent. All the examples are
 
     Me.sayHi();
     Me.saySomethingElse("I am hungry");
+    
+---
+
+### Persistence - saving user in cookie every time is updated:
+
+    var User = function() {
+        this._name = null;
+        this._age = 0;
+    };
+    User.prototype = {
+
+        getName: function() {
+            return this._name;
+        },
+
+        setName: function(name) {
+            this._name = name;
+        },
+
+        getAge: function() {
+            return this._age;
+        },
+
+        setAge: function(age) {
+            this._age = age;
+        }
+
+    };
+
+    var UserCookieManager = {
+
+        loadUser: function() {
+
+            var cookies = document.cookie.split(";"),
+                i,
+                cName,
+                cValue,
+                name,
+                age,
+                user;
+
+            for (i = 0; i < cookies.length; i++) {
+                cName = cookies[i].substr(0, cookies[i].indexOf("="));
+                cValue = cookies[i].substr(cookies[i].indexOf("=") + 1);
+                cName = cName.replace(/^\s+|\s+$/g,"");
+                if (cName == "name") {
+                    name = cValue;
+                } else if (cName == "age") {
+                    age = cValue;
+                }
+            }
+
+            if (name && age) {
+                user = new User();
+                user._name = name;
+                user._age = age;
+                }
+
+            return user;
+
+        },
+
+        saveUser: function() {
+            document.cookie = "name=" + this._name;
+            document.cookie = "age=" + this._age;
+        }
+
+    };
+
+    // Load the user from cookie or create a new one.
+    var currentUser = UserCookieManager.loadUser() || new User();
+
+    // Save in cookie every time the user is updated. Set currentUser as the this context for the hook function.
+    Agent.observe(User.prototype, "setName", UserCookieManager.saveUser, currentUser);
+    Agent.observe(User.prototype, "setAge", UserCookieManager.saveUser, currentUser);
+
+    // If there is no user filled in, initialize one.
+    if (!currentUser.getName()) {
+        currentUser.setName("Jorge");
+        currentUser.setAge(32);
+    }
