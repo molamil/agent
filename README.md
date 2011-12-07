@@ -16,7 +16,7 @@ Usage
 
 ### Agent.observe()
 
-Observes every time a given function or method is called, and attaches another function to be executed when that happens. A hook function can only be added once to a given observed function, subsequent attempts to add the same hook function will be ignored.
+Observes every time a given function or method is called, and attaches another function to be executed when that happens. A hook function can only be added once to a given observed function, subsequent attempts to add the same hook function will be ignored. All parameters passed to the original function will also be passed to the hooked functions.
 
 The supported method signatures are:
 
