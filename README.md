@@ -5,6 +5,8 @@ Agent is a slim JavaScript library that allows observing function calls by hooki
 
 Agent can be used as an [aspect-oriented programming](http://en.wikipedia.org/wiki/Aspect-oriented_programming) tool, as it enables definition of advices (hook functions) that can be linked to join points (observed functions). Practical AOP applications include logging, persistance and authentication.
 
+Apart from achieving AOP functionality, Agent can also be using in a number of different practical scenarios. Some are displayed on [the examples below](#examples)
+
 
 Usage
 -----
@@ -50,6 +52,7 @@ Stops observing a previously hooked function:
 * **o** _(object)_ Object that contains the function to observe. Example: `window`.
 
 
+<a id="examples" />
 Examples
 --------
 
