@@ -62,11 +62,11 @@ The following examples show some practical usages of Agent. All the examples are
 ### Wrapping window.onload:
 
     window.onload = function() {
-      alert("Default window.onload");
+        alert("Default window.onload");
     };
 
     Agent.observe("onload", function() {
-      alert("Hooked function");
+        alert("Hooked function");
     });
 
 ---
