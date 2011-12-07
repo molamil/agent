@@ -84,3 +84,39 @@ The following examples show some practical usages of Agent. All the examples are
         $("body").append("<h1>Hello World!</h1>");
         
     });
+    
+---
+
+### Emulating custom events by wrapping callbacks:
+
+    var Person = {
+
+        name: "",
+        age: 0,
+
+        sayHi: function() {
+            var hi = "Hi";
+            alert(hi);
+            this.onSpeak(hi);
+        },
+
+        saySomethingElse: function(something) {
+            alert(something);
+            this.onSpeak(something);
+        },
+
+        onSpeak: function(message) {
+            // Do nothing.
+        }
+
+    };
+
+    Person.name = "Jorge";
+    Person.age = 32;
+
+    Agent.observe(Person, "onSpeak", function(message) {
+        alert("Jorge has spoken: " + message);
+    });
+
+    Person.sayHi();
+    Person.saySomethingElse("I am hungry");
