@@ -89,10 +89,9 @@ The following examples show some practical usages of Agent. All the examples are
 
 ### Emulating custom events by wrapping callbacks:
 
-    var Person = {
+    var Me = {
 
-        name: "",
-        age: 0,
+        name: "Jorge",
 
         sayHi: function() {
             var hi = "Hi";
@@ -111,12 +110,9 @@ The following examples show some practical usages of Agent. All the examples are
 
     };
 
-    Person.name = "Jorge";
-    Person.age = 32;
-
-    Agent.observe(Person, "onSpeak", function(message) {
-        alert("Jorge has spoken: " + message);
+    Agent.observe(Me, "onSpeak", function(message) {
+        alert(Me.name + " has spoken: " + message);
     });
 
-    Person.sayHi();
-    Person.saySomethingElse("I am hungry");
+    Me.sayHi();
+    Me.saySomethingElse("I am hungry");
