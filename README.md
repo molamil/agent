@@ -53,6 +53,8 @@ Stops observing a previously hooked function:
 Examples
 --------
 
+The following examples show some practical usages of Agent. All the examples are available in the test directory.
+
 ### Wrapping window.onload:
 
     window.onload = function() {
