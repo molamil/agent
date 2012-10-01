@@ -57,9 +57,10 @@ Examples
 
 The following examples show some practical usages of Agent. All the examples are available in the test directory.
 
+
 ---
 
-### Wrapping window.onload:
+### Wrapping window.onload keeping the default function:
 
     window.onload = function() {
         alert("Default window.onload");
@@ -68,6 +69,7 @@ The following examples show some practical usages of Agent. All the examples are
     Agent.observe("onload", function() {
         alert("Hooked function");
     });
+
 
 ---
 
@@ -87,7 +89,7 @@ The following examples show some practical usages of Agent. All the examples are
     
 ---
 
-### Overloading callback functions instead of using events:
+### Overloading callback functions as an alternative of using events:
 
     var Me = {
 
