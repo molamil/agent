@@ -87,7 +87,7 @@ The following examples show some practical usages of Agent. All the examples are
     
 ---
 
-### Emulating custom events by wrapping callbacks:
+### Overloading callback functions instead of using events:
 
     var Me = {
 
@@ -119,7 +119,7 @@ The following examples show some practical usages of Agent. All the examples are
     
 ---
 
-### Persistence - saving user in cookie every time is updated:
+### Persistence - saving user in a cookie every time a value object is updated:
 
     var User = function() {
         this._name = null;
