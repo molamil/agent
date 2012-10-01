@@ -14,11 +14,12 @@ var _s = "";
 
 var _f = function() {
 	_s += "a";
+    return true;
 };
 
 var _fb = function() {
 	_s += "b";
-}
+};
 
 Agent.observe("_f", _fb);
 
@@ -26,7 +27,11 @@ Agent.observe("_f", function() {
 	_s += "c";
 });
 
-_f();
+var _r = _f();
+
+test("Return value", function() {
+    ok(_r, "_r = true");
+});
 
 test("Agent on window scope", function() {
 

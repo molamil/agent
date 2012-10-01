@@ -185,11 +185,17 @@
         _buildProxy: function(proxy) {
             proxy.o[proxy.fName] = function() {
                 var hook,
-                    i;
+                    i,
+                    r,
+                    ir;
                 for (i = proxy.hooks.length - 1; i >= 0; i--) {
                     hook = proxy.hooks[i];
-                    hook.f.apply(hook.thisContext || this, arguments);
+                    ir = hook.f.apply(hook.thisContext || this, arguments);
+                    if (hook.f === proxy.original)
+                        r = ir;
                 }
+                if (r)
+                    return r;
             }
         },
 
