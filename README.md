@@ -57,7 +57,6 @@ Examples
 
 The following examples show some practical usages of Agent. All the examples are available in the test directory.
 
-
 ---
 
 ### Wrapping window.onload keeping the default function:
@@ -69,7 +68,6 @@ The following examples show some practical usages of Agent. All the examples are
     Agent.observe("onload", function() {
         alert("Hooked function");
     });
-
 
 ---
 
