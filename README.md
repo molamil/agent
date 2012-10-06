@@ -1,7 +1,7 @@
 Agent - JavaScript function interceptor
 =======================================
 
-Agent is a slim JavaScript library that allows observing function calls by hooking further code to be executed when an observed function is invoked.
+Agent is a slim JavaScript library that allows observing function calls by hooking further code to be executed when an observed function is invoked. In plain English, you can add functions to be executed every time another specific function is called.
 
 Agent can be used as an [aspect-oriented programming](http://en.wikipedia.org/wiki/Aspect-oriented_programming) tool, as it enables definition of advices (hook functions) that can be linked to join points (observed functions). Practical AOP applications include logging, persistance and authentication.
 
@@ -16,7 +16,7 @@ Usage
 
 ### Agent.observe()
 
-Observes every time a given function or method is called, and attaches another function to be executed when that happens. A hook function can only be added once to a given observed function, subsequent attempts to add the same hook function will be ignored. All parameters passed to the original function will also be passed to the hooked functions.
+Observes every time a given function or method is called, and attaches another function to be executed at the time of the call. A hook function can only be added once to a given observed function, subsequent attempts to add the same hook function will be ignored. All parameters passed to the original function will also be passed to the hooked functions.
 
 The supported method signatures are:
 
@@ -31,11 +31,11 @@ The supported method signatures are:
 
 **Arguments:**
 
-* **fName** _(string)_ Name of the function to observe. Example: `"onload"`.
-* **hook** _(function)_ Function to be executed when the observed function is called. Example: `function() { alert("Hi there"); }`.
-* **o** _(object)_ Object that contains the function to observe (defined by `fName`). Example: `window`.
-* **thisContext** _(object)_ Value of `this` to be applied to the hook function. Example: `MyObject`.
-* **priority** _(number)_ Priority level of the hook, higher priorities will be executed before lower priorities. If two or more hooks have the same priority, they are executed on the order they were registered. Example: `10`.
+* **fName** _(string)_ Name of the function to observe. Example: `"onload"`
+* **hook** _(function)_ Function to be executed when the observed function is called. Example: `function() { alert("Hi there"); }`
+* **o** _(object)_ Object that contains the function to observe (defined by `fName`). Example: `window`. If the **o** is not passed, the function defined by `fName` will be assumed to be declared in `window` (global).
+* **thisContext** _(object)_ Value of `this` to be applied to the hook function. Example: `MyObject`
+* **priority** _(number)_ Priority level of the hook, higher priorities will be executed before lower priorities. If two or more hooks have the same priority, they are executed on the order they were registered. Example: `10`. The default priotity is `0`
 
 
 ### Agent.ignore()
@@ -47,9 +47,9 @@ Stops observing a previously hooked function:
 
 **Arguments:**
 
-* **fName** _(string)_ Name of the function holding the hook to ignore. Example: `"onload"`.
-* **hook** _(function)_ Function previously hooked via the `observe()` method. Example: `myFunction`.
-* **o** _(object)_ Object that contains the function to observe. Example: `window`.
+* **fName** _(string)_ Name of the function holding the hook to ignore. Example: `"onload"`
+* **hook** _(function)_ Function previously hooked via the `observe()` method. Example: `myFunction`
+* **o** _(object)_ Object that contains the function to observe. Example: `window`. If the **o** is not passed, the function defined by `fName` will be assumed to be declared in `window` (global).
 
 
 Examples
