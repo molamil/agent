@@ -33,7 +33,7 @@ The supported method signatures are:
 
 * **fName** _(string)_ Name of the function to observe. Example: `"onload"`
 * **hook** _(function)_ Function to be executed when the observed function is called. Example: `function() { alert("Hi there"); }`
-* **o** _(object)_ Object that contains the function to observe (defined by `fName`). Example: `window`. If the **o** is not passed, the function defined by `fName` will be assumed to be declared in `window` (global).
+* **o** _(object)_ Object that contains the function to observe (defined by `fName`). Example: `window`. If the **o** parameter is not passed, the function defined by `fName` will be assumed to be declared in `window` (global).
 * **thisContext** _(object)_ Value of `this` to be applied to the hook function. Example: `MyObject`
 * **priority** _(number)_ Priority level of the hook, higher priorities will be executed before lower priorities. If two or more hooks have the same priority, they are executed on the order they were registered. Example: `10`. The default priotity is `0`
 
@@ -49,7 +49,7 @@ Stops observing a previously hooked function:
 
 * **fName** _(string)_ Name of the function holding the hook to ignore. Example: `"onload"`
 * **hook** _(function)_ Function previously hooked via the `observe()` method. Example: `myFunction`
-* **o** _(object)_ Object that contains the function to observe. Example: `window`. If the **o** is not passed, the function defined by `fName` will be assumed to be declared in `window` (global).
+* **o** _(object)_ Object that contains the function to observe. Example: `window`. If the **o** parameter is not passed, the function defined by `fName` will be assumed to be declared in `window` (global).
 
 
 Examples
